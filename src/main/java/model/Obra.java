@@ -20,6 +20,9 @@ public class Obra
         this.dataCriacao = dataCriacao;
     }
 
+    public Obra() {
+    }
+
     // Acessores
     public int getId() { return id; }
     public String getNome() { return nome; }
