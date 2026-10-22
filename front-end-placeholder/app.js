@@ -108,21 +108,37 @@ function mudarCamposEspecificos()
 
 
 
-async function cadastrarObra(e) {
-    e.preventDefault();
-    const tipo = document.getElementById('cad-tipo').value;
+async function cadastrarObra(e)
+{
+    {
+        e.preventDefault();
 
-    const payload = {
-        nome: document.getElementById('cad-nome').value,
-        artista: document.getElementById('cad-artista').value,
-        descricao: document.getElementById('cad-descricao').value,
-        dataCriacao: document.getElementById('cad-data').value,
-        material: document.getElementById('cad-material').value,
-        pesoKG: parseFloat(document.getElementById('cad-peso').value)
-    };
+        const payload = {
+            nome: document.getElementById('cad-nome').value,
+            artista: document.getElementById('cad-artista').value,
+            descricao: document.getElementById('cad-descricao').value,
+            dataCriacao: document.getElementById('cad-data').value,
+            material: document.getElementById('cad-material').value,
+            pesoKG: parseFloat(document.getElementById('cad-peso').value)
+        };
 
-    // TODO: Enviar POST para o endpoint correto
-    console.log('Enviando cadastro de:', tipo, payload);
+        try {
+            const resposta = await fetch(`${API_URL}/escultura`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (resposta.ok) {
+                alert('Escultura cadastrada com sucesso!');
+                document.getElementById('form-cadastro').reset();
+            } else {
+                alert('Erro ao cadastrar escultura.');
+            }
+        } catch (erro) {
+            console.error('Erro de conexão:', erro);
+        }
+    }
 }
 
 
