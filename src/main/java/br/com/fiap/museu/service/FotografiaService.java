@@ -20,6 +20,11 @@ public class FotografiaService
         this.repository = repository;
     }
 
+    public List<Fotografia> buscarFotografias()
+    {
+        return repository.getAll();
+    }
+
     public Fotografia salvar(Fotografia fotografia)
     {
         if (fotografia.getDataCriacao() != null && fotografia.getDataCriacao().isAfter(LocalDate.now()))

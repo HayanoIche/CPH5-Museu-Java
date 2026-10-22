@@ -26,8 +26,8 @@ public class EsculturaResource
     @GetMapping
     public ResponseEntity<?> buscarEsculturas()
     {
-        List<EsculturaResponseDto> conquistaDtos = service.buscarEsculturas().stream().map(EsculturaMapper::toResponseDto).toList();
-        return ResponseEntity.ok(conquistaDtos);
+        List<EsculturaResponseDto> esculturasDtos = service.buscarEsculturas().stream().map(EsculturaMapper::toResponseDto).toList();
+        return ResponseEntity.ok(esculturasDtos);
     }
 
     @PostMapping
