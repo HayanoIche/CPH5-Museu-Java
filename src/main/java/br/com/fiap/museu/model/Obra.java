@@ -1,8 +1,8 @@
-package model;
+package br.com.fiap.museu.model;
 
 import java.time.LocalDate;
 
-public class Obra
+public abstract class Obra
 {
     // Atributos
     private int id;

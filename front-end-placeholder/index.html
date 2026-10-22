@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <title>Museusin</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <h1> Museu De Arte - Votação </h1>
+
+        <nav>
+            <button onclick="mostrarSecao('geral')"> Tabela Geral </button>
+            <button onclick="mostrarSecao('ranking')"> Ranking por Categoria </button>
+            <button onclick="mostrarSecao('cadastro')"> Cadastrar Obra </button>
+        </nav>
+
+        <hr>
+
+        <!-- geral -->
+        <div id="secao-geral">
+            <h2>Todas as Obras</h2>
+            <button onclick="carregarTodasObras()">Recarregar Obras</button>
+            <br><br>
+            <table>
+                <thead>
+                    <th>Posição</th>
+                    <th>Nome</th>
+                    <th>Artista</th>
+                    <th>Tipo</th>
+                    <th>Votos</th>
+                    <th>Ação</th>
+                </thead>
+                <tbody id="tabela-geral"> <!-- preenchido dps --> </tbody>
+            </table>
+        </div>
+
+        <!-- rankings individuais -->
+        <div id="secao-ranking">
+            <h2>Ranking por Categoria</h2>
+
+            <label>Tipo:</label>
+
+            <select id="filtro-tipo" onchange="carregarRanking()">
+                <option value="escultura">Escultura</option>
+                <option value="fotografia">Fotografia</option>
+            </select>
+
+            <br><br>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Posição</th>
+                        <th>Nome</th>
+                        <th>Artista</th>
+                        <th>Votos</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tabela-ranking"> <!-- preenchido dps --> </tbody>
+            </table>
+        </div>
+
+        <!-- cadastro -->
+        <div id="secao-cadastro">
+            <h2>Cadastrar Obra</h2>
+                <form id="form-cadastro" onsubmit="cadastrarObra(event, 'escultura')">
+        <p>
+            <label>Tipo de Obra:</label><br>
+            <select id="cad-tipo" onchange="mudarCamposEspecificos()">
+                <option value="escultura">Escultura</option>
+                <option value="fotografia">Fotografia</option>
+            </select>
+        </p>
+
+        <!-- Campos gerais -->
+        <p><label>Nome:</label><br><input type="text" id="cad-nome" required></p>
+        <p><label>Artista:</label><br><input type="text" id="cad-artista" required></p>
+        <p><label>Descrição:</label><br><textarea id="cad-descricao"></textarea></p>
+        <p><label>Data Criação:</label><br><input type="date" id="cad-data"></p>
+
+        <!-- Campos específicos da Escultura -->
+        <fieldset id="campos-escultura">
+            <legend>Escultura</legend>
+            <p><label>Material:</label><br><input type="text" id="cad-material"></p>
+            <p><label>Peso (KG):</label><br><input type="number" step="0.1" id="cad-peso"></p>
+        </fieldset>
+
+        <!-- Campos específicos da Fotografia -->
+        <fieldset id="campos-fotografia" style="display: none;">
+            <legend>Fotografia</legend>
+            <p><label>Câmera:</label><br><input type="text" id="cad-camera"></p>
+            <p><label>Resolução (DPI):</label><br><input type="number" step="0.1" id="cad-resolucao"></p>
+            <p><label><input type="checkbox" id="cad-colorida"> Foto Colorida</label></p>
+        </fieldset>
+
+        <br>
+        <button type="submit">Salvar</button>
+    </form>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
