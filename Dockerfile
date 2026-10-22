@@ -8,8 +8,8 @@ RUN mvn clean package -DskipTests
 # Estágio de Execução
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
-# Copia o .jar gerado no estágio anterior
-COPY --from=build /app/target/*-jar-with-dependencies.jar app.jar
+# Copia o .jar gerado no estágio anterior usando o prefixo do projeto
+COPY --from=build /app/target/museu-*.jar app.jar
 
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
