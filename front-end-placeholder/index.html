@@ -12,7 +12,7 @@
 
         <nav>
             <button onclick="mostrarSecao('geral')"> Tabela Geral </button>
-            <button onclick="mostrarSecao('ranking')"> Ranking </button>
+            <button onclick="mostrarSecao('ranking')"> Ranking por Categoria </button>
             <button onclick="mostrarSecao('cadastro')"> Cadastrar Obra </button>
         </nav>
 
@@ -25,13 +25,12 @@
             <br><br>
             <table>
                 <thead>
-                <tr>
                     <th>Posição</th>
                     <th>Nome</th>
                     <th>Artista</th>
+                    <th>Tipo</th>
                     <th>Votos</th>
                     <th>Ação</th>
-                </tr>
                 </thead>
                 <tbody id="tabela-geral"> <!-- preenchido dps --> </tbody>
             </table>
@@ -94,7 +93,9 @@
         <!-- Campos específicos da Fotografia -->
         <fieldset id="campos-fotografia" style="display: none;">
             <legend>Fotografia</legend>
-            <p><label>Resolução:</label><br><input type="text" id="cad-resolucao"></p>
+            <p><label>Câmera:</label><br><input type="text" id="cad-camera"></p>
+            <p><label>Resolução (DPI):</label><br><input type="number" step="0.1" id="cad-resolucao"></p>
+            <p><label><input type="checkbox" id="cad-colorida"> Foto Colorida</label></p>
         </fieldset>
 
         <!-- Campos específicos da Pintura -->
