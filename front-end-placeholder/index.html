@@ -45,7 +45,6 @@
             <select id="filtro-tipo" onchange="carregarRanking()">
                 <option value="escultura">Escultura</option>
                 <option value="fotografia">Fotografia</option>
-                <option value="pintura">Pintura</option>
             </select>
 
             <br><br>
@@ -73,7 +72,6 @@
             <select id="cad-tipo" onchange="mudarCamposEspecificos()">
                 <option value="escultura">Escultura</option>
                 <option value="fotografia">Fotografia</option>
-                <option value="pintura">Pintura</option>
             </select>
         </p>
 
@@ -96,12 +94,6 @@
             <p><label>Câmera:</label><br><input type="text" id="cad-camera"></p>
             <p><label>Resolução (DPI):</label><br><input type="number" step="0.1" id="cad-resolucao"></p>
             <p><label><input type="checkbox" id="cad-colorida"> Foto Colorida</label></p>
-        </fieldset>
-
-        <!-- Campos específicos da Pintura -->
-        <fieldset id="campos-pintura" style="display: none;">
-            <legend>Pintura</legend>
-            <p><label>Técnica:</label><br><input type="text" id="cad-tecnica"></p>
         </fieldset>
 
         <br>

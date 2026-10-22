@@ -85,7 +85,6 @@ function mudarCamposEspecificos() {
 
     document.getElementById('campos-escultura').style.display = tipo === 'escultura' ? 'block' : 'none';
     document.getElementById('campos-fotografia').style.display = tipo === 'fotografia' ? 'block' : 'none';
-    document.getElementById('campos-pintura').style.display = tipo === 'pintura' ? 'block' : 'none';
 }
 
 
@@ -112,8 +111,6 @@ async function cadastrarObra(e)
         payload.camera = document.getElementById('cad-camera').value;
         payload.resolucaoDPI = parseFloat(document.getElementById('cad-resolucao').value) || 0;
         payload.colorida = document.getElementById('cad-colorida').checked;
-    } else if (tipo === 'pintura') {
-        // payload da pintura aqui quando implementar
     }
 
     try {
