@@ -2,7 +2,6 @@ package br.com.fiap.museu.service;
 
 import br.com.fiap.museu.model.Escultura;
 import br.com.fiap.museu.repository.EsculturaRepository;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
