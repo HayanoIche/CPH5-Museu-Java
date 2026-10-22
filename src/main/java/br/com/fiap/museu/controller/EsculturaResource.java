@@ -39,4 +39,11 @@ public class EsculturaResource
 
         return ResponseEntity.status(201).body(responseDto);
     }
+
+    @PutMapping("/{id}/votar")
+    public ResponseEntity<Void> votar(@PathVariable int id)
+    {
+        service.votar(id);
+        return ResponseEntity.noContent().build(); // Retorna status 204
+    }
 }

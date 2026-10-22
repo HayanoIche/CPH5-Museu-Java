@@ -15,7 +15,8 @@ public class EsculturaService
     private final EsculturaRepository repository;
 
     @Autowired
-    public EsculturaService(EsculturaRepository repository) {
+    public EsculturaService(EsculturaRepository repository)
+    {
         this.repository = repository;
     }
 
@@ -33,5 +34,10 @@ public class EsculturaService
 
         repository.save(escultura);
         return escultura;
+    }
+
+    public void votar(int id)
+    {
+        repository.updateVotos(id);
     }
 }

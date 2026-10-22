@@ -144,8 +144,20 @@ async function cadastrarObra(e)
 
 
 async function votar(id) {
-    // TODO: enviar as informações novas pra api
-    console.log('Voto registrado para ID:', id);
+    try {
+        const resposta = await fetch(`${API_URL}/escultura/${id}/votar`, {
+            method: 'PUT'
+        });
+
+        if (resposta.ok) {
+            alert('Voto computado com sucesso!');
+            carregarTodasObras(); // Recarrega a tabela para atualizar os votos na tela
+        } else {
+            alert('Erro ao registrar voto.');
+        }
+    } catch (erro) {
+        console.error('Erro de conexão:', erro);
+    }
 }
 
 

@@ -47,7 +47,8 @@ public class EsculturaRepository
         }
     }
 
-    public List<Escultura> getAll() {
+    public List<Escultura> getAll()
+    {
         String sql = "SELECT id, nome, artista, descricao, numero_de_votos, data_criacao, material, peso_kg FROM tb_esculturas_jv";
         Connection con = DataSourceUtils.getConnection(dataSource);
         List<Escultura> esculturas = new ArrayList<>();
@@ -76,5 +77,21 @@ public class EsculturaRepository
         return esculturas;
     }
 
+    public void updateVotos(int id)
+    {
+        String sql = "UPDATE tb_esculturas_jv SET numero_de_votos = numero_de_votos + 1 WHERE id = ?";
+        Connection con = DataSourceUtils.getConnection(dataSource);
+        try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            int registros = pstmt.executeUpdate();
+            if (registros != 1) {
+                throw new RuntimeException("Escultura não encontrada para votação");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao registrar voto", e);
+        } finally {
+            DataSourceUtils.releaseConnection(con, dataSource);
+        }
+    }
 
 }
