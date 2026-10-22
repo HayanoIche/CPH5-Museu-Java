@@ -1,7 +1,6 @@
 package br.com.fiap.museu.repository;
 
 import br.com.fiap.museu.model.Escultura;
-import org.jspecify.annotations.NonNull;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.stereotype.Repository;
 
