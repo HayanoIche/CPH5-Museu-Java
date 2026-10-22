@@ -24,7 +24,7 @@ public class EsculturaRepository
     {
         String sql = "INSERT INTO tb_esculturas_jv (nome, artista, descricao, numero_de_votos, data_criacao, material, peso_kg) VALUES (?, ?, ?, ?, ?, ?, ?)";
         Connection con = DataSourceUtils.getConnection(dataSource);
-        try (PreparedStatement pstmt = con.prepareStatement(sql, new String[]{"idescultura"})) {
+        try (PreparedStatement pstmt = con.prepareStatement(sql, new String[]{"id"})) {
             pstmt.setString(1, escultura.getNome());
             pstmt.setString(2, escultura.getArtista());
             pstmt.setString(3, escultura.getDescricao());
