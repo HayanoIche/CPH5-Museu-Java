@@ -1,4 +1,4 @@
-package br.com.fiap.museu.model;
+package model;
 
 import java.time.LocalDate;
 
