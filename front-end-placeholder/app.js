@@ -33,7 +33,6 @@ async function carregarTodasObras()
         dados.forEach(o => {
             tbody.innerHTML += `
                 <tr>
-                    <td>${o.id}</td>
                     <td>${o.nome}</td>
                     <td>${o.artista}</td>
                     <td>${o.numeroDeVotos}</td>
@@ -68,7 +67,6 @@ async function carregarRanking()
             dados.forEach(o => {
                 tbody.innerHTML += `
                     <tr>
-                        <td>${o.id}</td>
                         <td>${o.nome}</td>
                         <td>${o.artista}</td>
                         <td>${o.numeroDeVotos}</td>
