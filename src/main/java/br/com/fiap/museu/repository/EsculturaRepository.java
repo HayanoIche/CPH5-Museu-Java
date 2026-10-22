@@ -49,7 +49,7 @@ public class EsculturaRepository
 
     public List<Escultura> getAll()
     {
-        String sql = "SELECT id, nome, artista, descricao, numero_de_votos, data_criacao, material, peso_kg FROM tb_esculturas_jv";
+        String sql = "SELECT id, nome, artista, descricao, numero_de_votos, data_criacao, material, peso_kg FROM tb_esculturas_jv ORDER BY numero_de_votos DESC";
         Connection con = DataSourceUtils.getConnection(dataSource);
         List<Escultura> esculturas = new ArrayList<>();
 

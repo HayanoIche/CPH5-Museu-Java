@@ -30,15 +30,18 @@ async function carregarTodasObras()
         const tbody = document.getElementById('tabela-geral');
         tbody.innerHTML = '';
 
+        posicao = 1
         dados.forEach(o => {
             tbody.innerHTML += `
                 <tr>
+                    <td>${posicao}</td>
                     <td>${o.nome}</td>
                     <td>${o.artista}</td>
                     <td>${o.numeroDeVotos}</td>
                     <td><button onclick="votar(${o.id})">Votar</button></td>
                 </tr>
             `;
+            posicao += 1;
         });
 
         console.log("obras carregadas!")
