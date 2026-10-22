@@ -20,6 +20,33 @@ public class EsculturaRepository
         this.dataSource = dataSource;
     }
 
+    public void save(Escultura escultura)
+    {
+        String sql = "INSERT INTO tb_esculturas_jv (nome, artista, descricao, numero_de_votos, data_criacao, material, peso_kg) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        Connection con = DataSourceUtils.getConnection(dataSource);
+        try (PreparedStatement pstmt = con.prepareStatement(sql, new String[]{"idescultura"})) {
+            pstmt.setString(1, escultura.getNome());
+            pstmt.setString(2, escultura.getArtista());
+            pstmt.setString(3, escultura.getDescricao());
+            pstmt.setInt(4, escultura.getNumeroDeVotos());
+            pstmt.setDate(5, escultura.getDataCriacao() != null ? Date.valueOf(escultura.getDataCriacao()) : null);
+            pstmt.setString(6, escultura.getMaterial());
+            pstmt.setDouble(7, escultura.getPesoKG());
+
+            int registros = pstmt.executeUpdate();
+            if (registros != 1) throw new RuntimeException("Nenhuma escultura adicionada");
+
+            ResultSet rs = pstmt.getGeneratedKeys();
+            if (rs.next()) {
+                escultura.setId(rs.getInt(1));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro na inserção da escultura", e);
+        } finally {
+            DataSourceUtils.releaseConnection(con, dataSource);
+        }
+    }
+
     public List<Escultura> getAll() {
         String sql = "SELECT id, nome, artista, descricao, numero_de_votos, data_criacao, material, peso_kg FROM tb_esculturas_jv";
         Connection con = DataSourceUtils.getConnection(dataSource);
@@ -48,4 +75,6 @@ public class EsculturaRepository
         }
         return esculturas;
     }
+
+
 }
