@@ -21,7 +21,7 @@ public class FotografiaRepository
 
     public void save(Fotografia fotografia)
     {
-        String sql = "INSERT INTO tb_fotos_jv (nome, artista, descricao, numero_de_votos, data_criacao, camera, resolucao_dpi, colorida) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO tb_fotos_jv (nome, artista, descricao, numero_de_votos, data_criacao, camera, resolucao_dpi, colorida) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         Connection con = DataSourceUtils.getConnection(dataSource);
         try (PreparedStatement pstmt = con.prepareStatement(sql, new String[]{"id"})) {
             pstmt.setString(1, fotografia.getNome());
@@ -47,4 +47,51 @@ public class FotografiaRepository
         }
     }
 
+    public List<Fotografia> getAll()
+    {
+        String sql = "SELECT id, nome, artista, descricao, numero_de_votos, data_criacao, camera, resolucao_dpi, colorida FROM tb_fotos_jv ORDER BY numero_de_votos DESC";
+        Connection con = DataSourceUtils.getConnection(dataSource);
+        List<Fotografia> fotografias = new ArrayList<>();
+
+        try (PreparedStatement pstmt = con.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+            while (rs.next()) {
+                Fotografia f = new Fotografia();
+                f.setId(rs.getInt("id"));
+                f.setNome(rs.getString("nome"));
+                f.setArtista(rs.getString("artista"));
+                f.setDescricao(rs.getString("descricao"));
+                f.setNumeroDeVotos(rs.getInt("numero_de_votos"));
+                if (rs.getDate("data_criacao") != null) {
+                    f.setDataCriacao(rs.getDate("data_criacao").toLocalDate());
+                }
+                f.setCamera(rs.getString("camera"));
+                f.setResolucaoDPI(rs.getDouble("resolucao_dpi"));
+                f.setColorida(rs.getInt("colorida") == 1);
+                fotografias.add(f);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao buscar fotografias", e);
+        } finally {
+            DataSourceUtils.releaseConnection(con, dataSource);
+        }
+        return fotografias;
+    }
+
+    public void updateVotos(int id)
+    {
+        String sql = "UPDATE tb_fotos_jv SET numero_de_votos = numero_de_votos + 1 WHERE id = ?";
+        Connection con = DataSourceUtils.getConnection(dataSource);
+        try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            int registros = pstmt.executeUpdate();
+            if (registros != 1) {
+                throw new RuntimeException("Fotografia não encontrada para votação");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao registrar voto", e);
+        } finally {
+            DataSourceUtils.releaseConnection(con, dataSource);
+        }
+    }
 }
