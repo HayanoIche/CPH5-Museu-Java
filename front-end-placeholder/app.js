@@ -24,13 +24,13 @@ function mostrarSecao(secao)
 async function carregarTodasObras()
 {
     try {
-        const res = await fetch(`${API_URL}/escultura`);
+        const res = await fetch(`${API_URL}`);
         const dados = await res.json();
 
         const tbody = document.getElementById('tabela-geral');
         tbody.innerHTML = '';
 
-        posicao = 1
+        let posicao = 1; // Corrigido para declarar a variável
         dados.forEach(o => {
             tbody.innerHTML += `
                 <tr>
@@ -44,7 +44,7 @@ async function carregarTodasObras()
             posicao += 1;
         });
 
-        console.log("obras carregadas!")
+        console.log("Obras gerais carregadas!");
     } catch (err) {
         alert('Erro ao carregar obras!');
     }
@@ -86,12 +86,54 @@ async function carregarRanking()
 
     if (tipo === "fotografia")
     {
-        // puxar as fotografias
+        try {
+            const res = await fetch(`${API_URL}/fotografia`);
+            const dados = await res.json();
+
+            const tbody = document.getElementById('tabela-ranking');
+            tbody.innerHTML = '';
+
+            dados.forEach(o => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${o.nome}</td>
+                        <td>${o.artista}</td>
+                        <td>${o.numeroDeVotos}</td>
+                        <td><button onclick="votar(${o.id})">Votar</button></td>
+                    </tr>
+                `;
+            });
+
+            console.log("fotografias carregadas!")
+        } catch (err) {
+            alert('Erro ao carregar obras!');
+        }
     }
 
-    if (tipo === "escultura")
+    if (tipo === "pintura")
     {
-        // puxar as esculturas
+        try {
+            const res = await fetch(`${API_URL}/pintura`);
+            const dados = await res.json();
+
+            const tbody = document.getElementById('tabela-ranking');
+            tbody.innerHTML = '';
+
+            dados.forEach(o => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${o.nome}</td>
+                        <td>${o.artista}</td>
+                        <td>${o.numeroDeVotos}</td>
+                        <td><button onclick="votar(${o.id})">Votar</button></td>
+                    </tr>
+                `;
+            });
+
+            console.log("pinturas carregadas!")
+        } catch (err) {
+            alert('Erro ao carregar obras!');
+        }
     }
 }
 
